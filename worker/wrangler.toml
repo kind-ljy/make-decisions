@@ -1,0 +1,15 @@
+name = "make-decisions-api"
+main = "worker.js"
+compatibility_date = "2025-09-01"
+
+# 部署后请用 `wrangler secret put ZHIPU_API_KEY` 注入 Key
+# vars 仅放非敏感配置
+[vars]
+ALLOWED_ORIGINS = "*"            # 上线前改成你的 Pages 域名，如 https://make-decisions.pages.dev
+RATE_LIMIT_PER_DAY = "100"       # 每个 IP 每天最多调用次数
+DAILY_TOKEN_BUDGET = "200000"    # 全局每日 token 上限（保护 Key）
+
+# 启用 KV 用于限流计数（可选；不绑定也能用，只是没限流）
+# [[kv_namespaces]]
+# binding = "RATE_KV"
+# id = "<在 Cloudflare 控制台创建 KV namespace 后填这里>"
